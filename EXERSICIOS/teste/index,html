@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>GPG Sistema</title>
+
+<style>
+body {margin:0;font-family:Arial;background:#f1f5f9;}
+.container {display:flex;height:100vh;}
+
+.sidebar {
+  width:220px;
+  background:#0f172a;
+  color:white;
+  padding:20px;
+}
+
+.menu li {
+  list-style:none;
+  padding:12px;
+  cursor:pointer;
+  border-radius:8px;
+}
+.menu li:hover, .active {background:#2563eb;}
+
+.main {flex:1;padding:20px;}
+
+.panel {display:none;}
+.card {
+  background:white;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+input {padding:8px;margin:5px;}
+button {padding:8px;cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <h2>Login</h2>
+  <input id="userInput" placeholder="Usuário">
+  <input id="passInput" type="password" placeholder="Senha">
+  <button onclick="login()">Entrar</button>
+</div>
+
+<!-- APP -->
+<div class="container" id="app" style="display:none;">
+
+<aside class="sidebar">
+  <h2>GPG PRO</h2>
+  <ul class="menu">
+    <li class="active" onclick="nav('dashboard', this)">Dashboard</li>
+    <li onclick="nav('produtos', this)">Produtos</li>
+    <li onclick="nav('clientes', this)">Clientes</li>
+    <li onclick="nav('vendas', this)">Vendas</li>
+  </ul>
+</aside>
+
+<main class="main">
+
+<div id="dashboard">
+  <h1>Dashboard</h1>
+  <div id="resumo"></div>
+</div>
+
+<div id="produtos" class="panel">
+  <h1>Produtos</h1>
+  <input id="p_nome" placeholder="Nome">
+  <input id="p_preco" placeholder="Preço">
+  <button onclick="addProduto()">Adicionar</button>
+  <div id="listaProdutos"></div>
+</div>
+
+<div id="clientes" class="panel">
+  <h1>Clientes</h1>
+  <input id="c_nome" placeholder="Nome">
+  <button onclick="addCliente()">Adicionar</button>
+  <div id="listaClientes"></div>
+</div>
+
+<div id="vendas" class="panel">
+  <h1>Vendas</h1>
+  <input id="v_nome" placeholder="Produto">
+  <input id="v_valor" placeholder="Valor">
+  <button onclick="addVenda()">Adicionar</button>
+  <div id="listaVendas"></div>
+</div>
+
+</main>
+</div>
+
+<script>
+
+// ===== BASE DE DADOS =====
+let db = JSON.parse(localStorage.getItem('gpg_db')) || {
+  user: {user:'admin', pass:'1234'},
+  produtos: [],
+  clientes: [],
+  vendas: []
+};
+
+function salvar(){
+  localStorage.setItem('gpg_db', JSON.stringify(db));
+}
+
+// ===== LOGIN =====
+function login(){
+  const u = document.getElementById('userInput').value;
+  const p = document.getElementById('passInput').value;
+
+  if(u === db.user.user && p === db.user.pass){
+    document.getElementById('login').style.display='none';
+    document.getElementById('app').style.display='flex';
+    renderAll();
+  } else {
+    alert("Login errado");
+  }
+}
+
+// ===== NAVEGAÇÃO =====
+function nav(pagina, el){
+  document.querySelectorAll('.panel').forEach(x=>x.style.display='none');
+  document.getElementById('dashboard').style.display='none';
+
+  if(pagina === 'dashboard'){
+    document.getElementById('dashboard').style.display='block';
+  } else {
+    document.getElementById(pagina).style.display='block';
+  }
+
+  document.querySelectorAll('.menu li').forEach(li=>li.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// ===== PRODUTOS =====
+function addProduto(){
+  const nome = document.getElementById('p_nome').value;
+  const preco = document.getElementById('p_preco').value;
+
+  if(!nome || !preco) return alert("Preencha tudo");
+
+  db.produtos.push({nome, preco});
+  salvar();
+  renderProdutos();
+}
+
+function renderProdutos(){
+  const lista = document.getElementById('listaProdutos');
+  lista.innerHTML='';
+
+  db.produtos.forEach((p,i)=>{
+    lista.innerHTML += `
+      <div class="card">
+        ${p.nome} - ${p.preco}
+        <button onclick="delProduto(${i})">❌</button>
+      </div>`;
+  });
+}
+
+function delProduto(i){
+  db.produtos.splice(i,1);
+  salvar();
+  renderProdutos();
+}
+
+// ===== CLIENTES =====
+function addCliente(){
+  const nome = document.getElementById('c_nome').value;
+  if(!nome) return;
+
+  db.clientes.push({nome});
+  salvar();
+  renderClientes();
+}
+
+function renderClientes(){
+  const lista = document.getElementById('listaClientes');
+  lista.innerHTML='';
+
+  db.clientes.forEach((c,i)=>{
+    lista.innerHTML += `
+      <div class="card">
+        ${c.nome}
+        <button onclick="delCliente(${i})">❌</button>
+      </div>`;
+  });
+}
+
+function delCliente(i){
+  db.clientes.splice(i,1);
+  salvar();
+  renderClientes();
+}
+
+// ===== VENDAS =====
+function addVenda(){
+  const nome = document.getElementById('v_nome').value;
+  const valor = document.getElementById('v_valor').value;
+
+  if(!nome || !valor) return;
+
+  db.vendas.push({nome, valor});
+  salvar();
+  renderVendas();
+}
+
+function renderVendas(){
+  const lista = document.getElementById('listaVendas');
+  lista.innerHTML='';
+
+  db.vendas.forEach((v,i)=>{
+    lista.innerHTML += `
+      <div class="card">
+        ${v.nome} - ${v.valor}
+        <button onclick="delVenda(${i})">❌</button>
+      </div>`;
+  });
+}
+
+function delVenda(i){
+  db.vendas.splice(i,1);
+  salvar();
+  renderVendas();
+}
+
+// ===== DASHBOARD =====
+function renderDashboard(){
+  document.getElementById('resumo').innerHTML = `
+    <div class="card">Produtos: ${db.produtos.length}</div>
+    <div class="card">Clientes: ${db.clientes.length}</div>
+    <div class="card">Vendas: ${db.vendas.length}</div>
+  `;
+}
+
+// ===== INIT =====
+function renderAll(){
+  renderProdutos();
+  renderClientes();
+  renderVendas();
+  renderDashboard();
+}
+
+</script>
+
+</body>
+</html>

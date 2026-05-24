@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Comunicação</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Lado do Chat -->
+        <section class="chat-box">
+            <h2>Chat Privado</h2>
+            <div id="messages" class="display"></div>
+            <input type="text" id="userInput" placeholder="Digite sua mensagem...">
+            <button onclick="sendMessage()">Enviar</button>
+        </section>
+
+        <!-- Lado da Interceptação -->
+        <section class="intercept-box">
+            <h2>Monitor de Interceptação (Real-Time)</h2>
+            <div id="interceptLog" class="display"></div>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

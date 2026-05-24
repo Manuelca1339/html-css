@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERP CA Serviços - Painel de Gestão</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <img class="brand-image" src="assets/img/ca-logo.png" alt="Logo CA Serviços">
+      <div>
+        <strong>ERP CA Serviços</strong>
+        <small>Gestão empresarial</small>
+      </div>
+    </div>
+
+    <nav class="menu" aria-label="Menu principal">
+      <a class="active" href="#dashboard">Painel</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#qr-produtos">Produtos</a>
+      <a href="#funcionarios">Equipa</a>
+      <a href="#faturacao">Faturas</a>
+      <a href="#indicadores">Indicadores</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <img src="assets/img/pro-plan.png" alt="Plano profissional">
+      <span>Plano Profissional</span>
+      <strong>Sistema online</strong>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Painel administrativo</p>
+        <h1>Visão geral da operação</h1>
+      </div>
+
+      <div class="top-actions">
+        <button class="btn ghost" type="button" data-action="exportar"><span class="btn-icon">⇩</span>Relatório PDF</button>
+        <button class="btn soft" type="button" data-action="abrir-faturacao"><span class="btn-icon">▣</span>Faturação</button>
+        <button class="btn primary" type="button" data-action="nova-venda"><span class="btn-icon">＋</span>Nova venda</button>
+        <button class="btn power" type="button" data-action="sair" aria-label="Desligar sistema"><span class="btn-icon">⏻</span>Desligar</button>
+      </div>
+    </header>
+
+    <section class="kpis" id="dashboard">
+      <article class="kpi">
+        <span>Total de vendas</span>
+        <strong id="kpi-vendas">8.450.000 FCFA</strong>
+        <small class="positive">+12,4% este mês</small>
+      </article>
+      <article class="kpi">
+        <span>Clientes ativos</span>
+        <strong id="kpi-clientes">328</strong>
+        <small class="positive">+18 novos</small>
+      </article>
+      <article class="kpi">
+        <span>Produtos em stock</span>
+        <strong id="kpi-produtos">1.240</strong>
+        <small class="warning">14 com stock baixo</small>
+      </article>
+      <article class="kpi">
+        <span>Saldo de caixa</span>
+        <strong id="kpi-caixa">2.315.000 FCFA</strong>
+        <small class="positive">Caixa aberto</small>
+      </article>
+    </section>
+
+    <section class="layout">
+      <aside class="panel span-2" id="indicadores">
+        <div class="panel-header">
+          <div>
+            <h2>Indicadores financeiros</h2>
+            <p>Comparação mensal de receitas, despesas e saldo.</p>
+          </div>
+        </div>
+
+        <div class="analytics-panel">
+          <div class="bar-chart" aria-label="Gráfico de desempenho financeiro">
+            <div class="bar-group">
+              <span>Jan</span>
+              <i style="height: 48%"></i>
+            </div>
+            <div class="bar-group">
+              <span>Fev</span>
+              <i style="height: 62%"></i>
+            </div>
+            <div class="bar-group">
+              <span>Mar</span>
+              <i style="height: 55%"></i>
+            </div>
+            <div class="bar-group">
+              <span>Abr</span>
+              <i style="height: 72%"></i>
+            </div>
+            <div class="bar-group">
+              <span>Mai</span>
+              <i style="height: 88%"></i>
+            </div>
+          </div>
+          <div class="analytics-summary">
+            <article>
+              <span>Receita média</span>
+              <strong>1.690.000 FCFA</strong>
+            </article>
+            <article>
+              <span>Margem estimada</span>
+              <strong>27%</strong>
+            </article>
+            <article>
+              <span>Crescimento</span>
+              <strong class="positive">+12,4%</strong>
+            </article>
+          </div>
+        </div>
+      </aside>
+
+      <div class="panel" id="clientes">
+        <div class="panel-header">
+          <div>
+            <h2>Cadastro rápido</h2>
+            <p>Registo de cliente ou entidade.</p>
+          </div>
+        </div>
+
+        <form class="form" id="cliente-form">
+          <label>
+            Nome
+            <input name="nome" type="text" placeholder="Nome do cliente">
+          </label>
+          <label>
+            Telefone
+            <input name="telefone" type="tel" placeholder="+245 95 529 84 18">
+          </label>
+          <label>
+            Tipo
+            <select name="tipo">
+              <option>Particular</option>
+              <option>Empresa</option>
+              <option>Fornecedor</option>
+            </select>
+          </label>
+          <button class="btn primary full" type="submit">Guardar cliente</button>
+        </form>
+      </div>
+
+      <div class="panel" id="funcionarios">
+        <div class="panel-header">
+          <div>
+            <h2>Funcionários</h2>
+            <p>Equipa ativa por departamento.</p>
+          </div>
+          <button class="btn soft" type="button" data-action="novo-funcionario"><span class="btn-icon">＋</span>Novo</button>
+        </div>
+
+        <div class="stock-list" id="funcionarios-list">
+          <div><span>Ana Gomes</span><strong>Vendas</strong></div>
+          <div><span>Carlos Embaló</span><strong>Técnico</strong></div>
+        </div>
+      </div>
+
+      <div class="panel span-2" id="qr-produtos">
+        <div class="panel-header">
+          <div>
+            <h2>Leitor QR de produtos</h2>
+            <p>Leia o código QR ou digite o código para adicionar ao stock.</p>
+          </div>
+          <button class="btn soft" type="button" data-action="iniciar-qr"><span class="btn-icon">◈</span>Ligar leitor</button>
+        </div>
+
+        <div class="qr-grid">
+          <div class="qr-reader">
+            <video id="qr-video" playsinline muted></video>
+            <canvas id="qr-canvas" hidden></canvas>
+            <span id="qr-status">Câmera desligada</span>
+          </div>
+
+          <form class="form" id="qr-form">
+            <label>
+              Código do produto
+              <input name="codigo" id="qr-code-input" type="text" placeholder="Ex.: PROD-001">
+            </label>
+            <label>
+              Nome do produto
+              <input name="produto" id="qr-product-input" type="text" placeholder="Nome do produto">
+            </label>
+            <button class="btn primary full" type="submit"><span class="btn-icon">＋</span>Adicionar produto</button>
+            <button class="btn ghost full" type="button" data-action="parar-qr"><span class="btn-icon">⏻</span>Desligar leitor</button>
+          </form>
+        </div>
+
+        <div class="product-list-block">
+          <h3>Produtos adicionados</h3>
+          <div class="stock-list" id="produtos-list">
+            <div><span>Nenhum produto novo</span><strong>Aguardando QR</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="faturacao">
+        <div class="panel-header">
+          <div>
+            <h2>Faturação</h2>
+            <p>Emissão e consulta de documentos fiscais.</p>
+          </div>
+          <button class="btn soft" type="button" data-action="emitir-fatura"><span class="btn-icon">▣</span>Emitir fatura</button>
+        </div>
+
+        <div class="finance-list">
+          <div><span>Próxima fatura</span><strong>FT-00085</strong></div>
+          <div><span>Faturas pagas</span><strong>156</strong></div>
+          <div><span>Faturas pendentes</span><strong>12</strong></div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+  <section class="login-panel" id="login-panel">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="assets/img/ca-logo.png" alt="Logo CA Serviços">
+      </div>
+      <h2>Página de login</h2>
+      <form id="login-form">
+        <label>
+          Nome de acesso
+          <input name="usuario" type="text" value="admin" autocomplete="username">
+        </label>
+        <label class="password-field">
+          Senha
+          <span>
+            <input id="login-password" name="senha" type="password" value="1234" autocomplete="current-password">
+            <button type="button" data-action="toggle-password">Ver</button>
+          </span>
+        </label>
+        <button class="btn primary full" type="submit"><span class="btn-icon">→</span>Acessar sistema</button>
+      </form>
+      <div class="login-actions">
+        <button class="btn ghost full" type="button" data-action="abrir-recuperacao"><span class="btn-icon">?</span>Esqueci a senha</button>
+      </div>
+      <form class="register-form hidden" id="recover-form">
+        <label>
+          Nome cadastrado
+          <input name="usuario_recuperacao" type="text" placeholder="Digite seu nome de acesso">
+        </label>
+        <label>
+          Nova senha
+          <input name="nova_senha" type="password" placeholder="Digite a nova senha">
+        </label>
+        <button class="btn soft full" type="submit"><span class="btn-icon">✓</span>Repor senha</button>
+      </form>
+      <small>Login único inicial: admin / 1234.</small>
+    </div>
+  </section>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

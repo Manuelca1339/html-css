@@ -1,0 +1,49 @@
+const express = require('express');
+const fs = require('fs');
+const app = express();
+
+app.use(express.json());
+app.use(express.static('public'));
+
+const DB_FILE = 'db.json';
+
+// carregar dados
+function loadDB(){
+  return JSON.parse(fs.readFileSync(DB_FILE));
+}
+
+// salvar dados
+function saveDB(data){
+  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+}
+
+// ===== LOGIN =====
+app.post('/login', (req,res)=>{
+  const {user, pass} = req.body;
+  const db = loadDB();
+
+  const u = db.users.find(u => u.user === user && u.pass === pass);
+  if(u) return res.json({ok:true});
+  res.json({ok:false});
+});
+
+// ===== PRODUTOS =====
+app.get('/produtos', (req,res)=>{
+  res.json(loadDB().produtos);
+});
+
+app.post('/produtos', (req,res)=>{
+  const db = loadDB();
+  db.produtos.push(req.body);
+  saveDB(db);
+  res.json({ok:true});
+});
+
+app.delete('/produtos/:id', (req,res)=>{
+  const db = loadDB();
+  db.produtos.splice(req.params.id,1);
+  saveDB(db);
+  res.json({ok:true});
+});
+
+app.listen(3000, ()=>console.log("Servidor rodando em http://localhost:3000"));

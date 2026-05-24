@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Sistema GPG</title>
+
+<style>
+body {margin:0;font-family:Arial;background:#f5f7fb;}
+.container {display:flex;height:100vh;}
+
+.sidebar {
+  width:250px;
+  background:#0b1020;
+  color:white;
+  padding:20px;
+}
+
+.menu li {
+  list-style:none;
+  padding:12px;
+  cursor:pointer;
+  border-radius:8px;
+}
+
+.menu li:hover, .active {
+  background:#2563eb;
+}
+
+.menu a {
+  color:white;
+  text-decoration:none;
+  display:block;
+}
+
+.main {flex:1;padding:20px;}
+
+.panel {display:none;}
+.cards {display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.card {background:white;padding:15px;border-radius:10px;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- MENU -->
+<aside class="sidebar">
+  <h2>GPG</h2>
+  <ul class="menu">
+    <li class="active"><a href="#dashboard">🏠 Dashboard</a></li>
+    <li><a href="#clientes">👥 Clientes</a></li>
+    <li><a href="#produtos">📦 Produtos</a></li>
+    <li><a href="#vendas">💰 Vendas</a></li>
+    <li><a href="#estoque">📋 Estoque</a></li>
+    <li><a href="#financeiro">🏦 Financeiro</a></li>
+    <li><a href="#relatorios">📊 Relatórios</a></li>
+    <li><a href="#configuracoes">⚙️ Configurações</a></li>
+  </ul>
+</aside>
+
+<!-- CONTEÚDO -->
+<main class="main">
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <h1>Dashboard</h1>
+  <div class="cards">
+    <div class="card">Vendas: 0</div>
+    <div class="card">Clientes: 0</div>
+    <div class="card">Produtos: 0</div>
+    <div class="card">Lucro: 0</div>
+  </div>
+</div>
+
+<!-- CLIENTES -->
+<div id="clientes" class="panel">
+  <h1>Clientes</h1>
+  <p>Lista de clientes...</p>
+</div>
+
+<!-- PRODUTOS -->
+<div id="produtos" class="panel">
+  <h1>Produtos</h1>
+
+  <input id="nome" placeholder="Nome">
+  <input id="qtd" placeholder="Quantidade">
+  <button onclick="addProduto()">Adicionar</button>
+
+  <ul id="lista"></ul>
+</div>
+
+<!-- VENDAS -->
+<div id="vendas" class="panel">
+  <h1>Vendas</h1>
+</div>
+
+<!-- ESTOQUE -->
+<div id="estoque" class="panel">
+  <h1>Estoque</h1>
+</div>
+
+<!-- FINANCEIRO -->
+<div id="financeiro" class="panel">
+  <h1>Financeiro</h1>
+</div>
+
+<!-- RELATÓRIOS -->
+<div id="relatorios" class="panel">
+  <h1>Relatórios</h1>
+</div>
+
+<!-- CONFIG -->
+<div id="configuracoes" class="panel">
+  <h1>Configurações</h1>
+</div>
+
+</main>
+</div>
+
+<script>
+
+// MENU FUNCIONAL
+const links = document.querySelectorAll('.menu a');
+const panels = document.querySelectorAll('.panel');
+const dashboard = document.getElementById('dashboard');
+
+links.forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const id = link.getAttribute('href').replace('#','');
+
+    // esconder tudo
+    panels.forEach(p => p.style.display = 'none');
+    dashboard.style.display = 'none';
+
+    // mostrar destino
+    if(id === 'dashboard'){
+      dashboard.style.display = 'block';
+    } else {
+      document.getElementById(id).style.display = 'block';
+    }
+
+    // active menu
+    document.querySelectorAll('.menu li').forEach(li => li.classList.remove('active'));
+    link.parentElement.classList.add('active');
+  });
+});
+
+
+// PRODUTOS FUNCIONAL
+function addProduto(){
+  const nome = document.getElementById('nome').value;
+  const qtd = document.getElementById('qtd').value;
+
+  if(!nome || !qtd){
+    alert("Preenche tudo");
+    return;
+  }
+
+  const li = document.createElement('li');
+  li.innerHTML = `
+    ${nome} - ${qtd}
+    <button onclick="this.parentElement.remove()">❌</button>
+  `;
+
+  document.getElementById('lista').appendChild(li);
+
+  document.getElementById('nome').value = '';
+  document.getElementById('qtd').value = '';
+}
+
+</script>
+
+</body>
+</html>
