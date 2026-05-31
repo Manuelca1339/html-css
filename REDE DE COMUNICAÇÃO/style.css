@@ -1,0 +1,243 @@
+:root {
+    --bg-main: #0a0f1d;
+    --bg-card: #131c31;
+    --border-color: #223153;
+    --text-primary: #e2e8f0;
+    --text-muted: #64748b;
+    --cyan: #06b6d4;
+    --red: #ef4444;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: 'Segoe UI', system-ui, sans-serif; 
+}
+
+body { 
+    background-color: var(--bg-main); 
+    color: var(--text-primary); 
+    height: 100vh; 
+    overflow: hidden; 
+}
+
+.app-container { 
+    display: flex; 
+    height: 100vh; 
+    width: 100vw; 
+}
+
+/* BARRA LATERAL DE NAVEGAÇÃO */
+.nav-panel {
+    width: 260px; 
+    background-color: #0d1527; 
+    border-right: 1px solid var(--border-color);
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+}
+
+.brand { 
+    font-weight: 800; 
+    font-size: 20px; 
+    color: var(--cyan); 
+    letter-spacing: 2px; 
+    margin-bottom: 30px; 
+}
+
+.menu-section { 
+    font-size: 11px; 
+    color: var(--text-muted); 
+    font-weight: bold; 
+    margin: 20px 0 10px 0; 
+}
+
+.menu a { 
+    display: block; 
+    color: #94a3b8; 
+    text-decoration: none; 
+    padding: 10px; 
+    border-radius: 6px; 
+    font-size: 14px; 
+    margin-bottom: 5px; 
+}
+
+.menu a:hover, .menu a.active { 
+    background-color: var(--bg-card); 
+    color: var(--cyan); 
+}
+
+.server-specs { 
+    font-size: 12px; 
+    color: var(--text-muted); 
+    background: #070b14; 
+    padding: 10px; 
+    border-radius: 4px; 
+}
+
+.status-online {
+    color: var(--cyan);
+    font-weight: bold;
+}
+
+/* GRID DOS PAINÉIS */
+.dashboard-grid {
+    flex: 1; 
+    padding: 20px; 
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.panel-card {
+    background-color: var(--bg-card); 
+    border: 1px solid var(--border-color);
+    border-radius: 8px; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: #10192e; 
+    padding: 12px 15px; 
+    font-size: 12px; 
+    font-weight: bold;
+    letter-spacing: 1px; 
+    color: #94a3b8; 
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* FILA DE ALVOS */
+.stream-list { 
+    padding: 15px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.stream-item {
+    background-color: #182542; 
+    padding: 15px; 
+    border-radius: 6px; 
+    border-left: 4px solid var(--text-muted);
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    transition: all 0.3s;
+}
+
+.stream-item.Interceptando { 
+    border-left-color: var(--red); 
+    background: #221a2b; 
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.2); 
+}
+
+.badge { 
+    font-size: 10px; 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    display: block; 
+    width: fit-content; 
+    margin-bottom: 5px; 
+}
+
+.badge-red { background-color: rgba(239, 68, 68, 0.2); color: var(--red); }
+.badge-blue { background-color: rgba(6, 182, 212, 0.2); color: var(--cyan); }
+.target-info p { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
+
+.btn-action {
+    background: transparent; 
+    border: 1px solid var(--cyan); 
+    color: var(--cyan);
+    padding: 8px 16px; 
+    border-radius: 4px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: all 0.2s;
+}
+
+.btn-action:hover { 
+    background: rgba(6, 182, 212, 0.1); 
+}
+
+.btn-action.active { 
+    background: var(--red); 
+    border-color: var(--red); 
+    color: #fff; 
+}
+
+/* CONTÊINER DO GRÁFICO */
+.chart-container { 
+    flex: 1; 
+    padding: 15px; 
+    position: relative; 
+    max-height: 280px; 
+}
+
+/* TERMINAL DE TRANSCRIÇÃO */
+.transcription-box { 
+    flex: 1; 
+    padding: 15px; 
+    background-color: #090e1a; 
+    font-family: monospace; 
+    font-size: 13px; 
+    line-height: 1.6; 
+    overflow-y: auto; 
+    max-height: 280px; 
+}
+
+.msg-alvo { 
+    color: #f43f5e; 
+    margin-bottom: 8px; 
+    border-left: 2px solid var(--red); 
+    padding-left: 8px; 
+}
+
+.msg-destino { 
+    color: #38bdf8; 
+    margin-bottom: 8px; 
+    border-left: 2px solid var(--cyan); 
+    padding-left: 8px; 
+}
+
+.meta { 
+    color: #22c55e; 
+    margin-bottom: 8px; 
+    font-style: italic; 
+}
+
+/* PAINEL DE TELEMETRIA */
+.telemetry-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px; 
+    padding: 25px; 
+    text-align: center; 
+}
+
+.tel-item { 
+    background: #0d1527; 
+    padding: 15px; 
+    border-radius: 6px; 
+    border: 1px solid var(--border-color); 
+}
+
+.tel-item h5 { 
+    font-size: 11px; 
+    color: var(--text-muted); 
+    margin-bottom: 5px; 
+    text-transform: uppercase; 
+}
+
+.tel-item span { 
+    font-size: 18px; 
+    font-weight: bold; 
+    color: var(--cyan); 
+    font-family: monospace; 
+}
