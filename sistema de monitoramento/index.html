@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Rastreamento em Tempo Real</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>LOGÍSTICA RT</h2>
+            <div class="status-card">
+                <p><strong>Dispositivo:</strong> Tracker_01</p>
+                <p><strong>Status:</strong> <span id="status" class="online">Conectado</span></p>
+                <p><strong>Latitude:</strong> <span id="lat">-</span></p>
+                <p><strong>Longitude:</strong> <span id="lng">-</span></p>
+                <p><strong>Última Atualização:</strong> <span id="time">-</span></p>
+            </div>
+            <button id="btnSimular" class="btn">Simular Movimento</button>
+        </aside>
+
+        <main id="map"></main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
