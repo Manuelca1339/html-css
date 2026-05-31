@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGINT CORE - Central de Interceptação de Sinais</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <aside class="nav-panel">
+            <div>
+                <div class="brand">SIGINT SYSTEM</div>
+                <nav class="menu">
+                    <div class="menu-section">MONITORAMENTO</div>
+                    <a href="#" class="active">📊 Escuta em Tempo Real</a>
+                    <a href="#">🎯 Alvos Cadastrados</a>
+                    <a href="#">📁 Arquivos de Áudio (RTP)</a>
+                    <div class="menu-section">AUDITORIA</div>
+                    <a href="#">📜 Logs do Sistema</a>
+                </nav>
+            </div>
+            <div class="server-specs">
+                <p>Status Core: <span id="server-status" class="offline">DESCONECTADO</span></p>
+                <p>Uso de CPU: <span id="cpu-load">0%</span></p>
+                <p>Trafego: <span id="net-load">0.00 Mbps</span></p>
+            </div>
+        </aside>
+
+        <main class="dashboard-grid">
+            
+            <section class="panel-card">
+                <div class="card-header">📡 DISPOSITIVOS ATIVOS NA REDE (VOIP)</div>
+                <div class="stream-list">
+                    
+                    <div class="stream-item" id="target-1">
+                        <div class="target-info">
+                            <span class="badge badge-red">ALVO 01</span>
+                            <strong>Canal SIP/2001</strong>
+                            <p>IP: 192.168.1.50 // Operadora: Tronco-IP</p>
+                        </div>
+                        <button class="btn-action" onclick="alternarGrampo(1)">GRAMPEAR</button>
+                    </div>
+
+                    <div class="stream-item" id="target-2">
+                        <div class="target-info">
+                            <span class="badge badge-blue">ALVO 02</span>
+                            <strong>Canal SIP/2002</strong>
+                            <p>IP: 192.168.1.55 // Operadora: Tronco-IP</p>
+                        </div>
+                        <button class="btn-action" onclick="alternarGrampo(2)">GRAMPEAR</button>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="panel-card">
+                <div class="card-header">📈 ANÁLISE DE FREQUÊNCIA DA VOZ INTERCEPTADA</div>
+                <div class="chart-container">
+                    <canvas id="spectrogramChart"></canvas>
+                </div>
+            </section>
+
+            <section class="panel-card">
+                <div class="card-header">📝 TRANSCRIÇÃO COGNITIVA AUTOMÁTICA (VOICE-TO-TEXT)</div>
+                <div class="transcription-box" id="transcriptionBox">
+                    <p class="meta">[SISTEMA]: Conecte o painel ao servidor Java para iniciar.</p>
+                </div>
+            </section>
+
+            <section class="panel-card">
+                <div class="card-header">⚙️ METADADOS TÉCNICOS DA CONEXÃO REAIS</div>
+                <div class="telemetry-grid">
+                    <div class="tel-item"><h5>Codec de Áudio</h5><span id="meta-codec">NENHUM</span></div>
+                    <div class="tel-item"><h5>Jitter Flutuante</h5><span id="meta-jitter">0.0 ms</span></div>
+                    <div class="tel-item"><h5>Perda de Pacotes</h5><span id="meta-loss">0.00%</span></div>
+                    <div class="tel-item"><h5>Latência de Rede</h5><span id="meta-ping">0 ms</span></div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
