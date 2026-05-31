@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Vigilância RT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>SISTEMA DE VIGILÂNCIA EM TEMPO REAL</h1>
+            <div id="status" class="status-online">SISTEMA OPERACIONAL</div>
+        </header>
+        
+        <main class="camera-grid">
+            <div class="camera-box">
+                <div class="camera-header">CAM 01 - AMBIENTE PRINCIPAL</div>
+                <video id="videoFeed" autoplay playsinline muted></video>
+                <div class="rec-indicator">REC</div>
+            </div>
+
+            <div class="camera-box offline">
+                <div class="camera-header">CAM 02 - CORREDOR EXTERNO</div>
+                <div class="placeholder-text">SEM SINAL (DISCONECTED)</div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

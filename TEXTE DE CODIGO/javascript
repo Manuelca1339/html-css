@@ -1,0 +1,24 @@
+async function iniciarVigilancia() {
+    const video = document.getElementById('videoFeed');
+
+    try {
+        // Solicita acesso à câmera do usuário
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+            video: { 
+                width: { ideal: 1280 },
+                height: { ideal: 720 },
+                frameRate: { ideal: 30 }
+            }, 
+            audio: false 
+        });
+        
+        // Vincula o fluxo de vídeo ao elemento HTML
+        video.srcObject = stream;
+    } catch (error) {
+        console.error("Erro ao acessar a câmera de segurança:", error);
+        document.querySelector('.camera-header').innerText = "ERRO: ACESSO NEGADO À CÂMERA";
+    }
+}
+
+// Inicializa o sistema quando a página carrega
+window.addEventListener('DOMContentLoaded', iniciarVigilancia);
